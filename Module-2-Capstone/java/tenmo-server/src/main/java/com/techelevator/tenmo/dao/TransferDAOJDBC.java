@@ -14,7 +14,7 @@ public class TransferDAOJDBC implements TransferDAO {
 	private JdbcTemplate jdbcTemplate;
 	private AccountDAO account;							// We want to use a method from the AccountDAO and so it must be referenced
 
-	public TransferDAOJDBC (JdbcTemplate jdbcTemplate, AccountDAO account) {	//Using dependency injection we can access the Account DAO methods
+	public TransferDAOJDBC (JdbcTemplate jdbcTemplate, AccountDAO account) {	//Using Spring dependency injection we can access the Account DAO methods
 		this.jdbcTemplate = jdbcTemplate;
 		this.account = account;
 

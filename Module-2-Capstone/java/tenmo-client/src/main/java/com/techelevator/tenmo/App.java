@@ -141,33 +141,11 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		
 		 applicationService.makeTransfer(currentUser.getToken(),aTransfer);
 			System.out.println("Transfer completed succesfully!");
-			
-			
-			
+				
 			
 		}
 	
-		
 	
-		
-		// TODO Auto-generated method stub
-		
-//		System.out.println("Choose which User you would like to send TE bucks to");
-//		System.out.println("(1) ");				// get user Id
-//		System.out.println("(2) "); 			// 
-//		
-//		
-//		System.out.println("Please choose an option >>> ");
-//		Scanner newScanner = new Scanner(System.in);
-//		String userInput = newScanner.nextLine();
-//		if (userInput == 1) {
-//			
-//		}
-//		else if (userInput == 2) {
-//			do
-//		}
-	
-
 	private void requestBucks() {
 		// TODO Auto-generated method stub
 		

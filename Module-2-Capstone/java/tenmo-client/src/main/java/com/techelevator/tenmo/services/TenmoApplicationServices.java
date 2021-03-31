@@ -29,59 +29,59 @@ public class TenmoApplicationServices {
 
 
 	public double getAccountBalance(String authToken)  {
-		
+
 		double accountBalance;
 		accountBalance = restTemplate.exchange(API_BASE_URL + "account/balance", HttpMethod.GET, makeAuthEntity(authToken), double.class).getBody();
 
 		return accountBalance;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<AccountUser> listUsers(String authToken) {
 		List<AccountUser> theUsers = new ArrayList<AccountUser>();
-		
+
 		theUsers = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(authToken), List.class).getBody();
-		
+
 		return theUsers;
-		
+
 	}
 	public void makeTransfer(String authToken, Transfer aTransfer) throws Exception {
-	
-	 restTemplate.exchange(API_BASE_URL + "/transfer", HttpMethod.POST, makeTransferEntity(aTransfer, authToken), Transfer.class);
-	
+
+		restTemplate.exchange(API_BASE_URL + "/transfer", HttpMethod.POST, makeTransferEntity(aTransfer, authToken), Transfer.class);
+
 	}
-	
-		public Transfer[] listTransfers (String authToken) {
-			Transfer[] transfers;
-			
-			transfers = restTemplate.exchange(API_BASE_URL + "/transfer/list", HttpMethod.GET, makeAuthEntity(authToken), Transfer[].class).getBody();
-			
-			return transfers;
-			
-		}
-		public Transfer getTransferById (String authToken, long id) {
-			Transfer transfers =  new Transfer();
-			transfers = restTemplate.exchange(API_BASE_URL + "/transfer/" + id, HttpMethod.GET, makeAuthEntity(authToken), Transfer.class).getBody();
-			
-			return transfers;
-			
-		}
-		
-	
-	
-	  private HttpEntity makeAuthEntity(String authToken) {
-		    HttpHeaders headers = new HttpHeaders();						// Instantiate a header object for request
-		    headers.setBearerAuth(authToken);								// Set the "bearer" attribute in the header to the JWT																// the "bearer" attribute in a request header holds JWT
-		    HttpEntity entity = new HttpEntity<>(headers);					// Create a properly formatted request by instantiating an entity
-		    return entity;
-		  }
-	  private HttpEntity<Transfer> makeTransferEntity(Transfer transfer, String authToken) {
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.setContentType(MediaType.APPLICATION_JSON);
-	        headers.setBearerAuth(authToken);
-	        HttpEntity<Transfer> entity = new HttpEntity<>(transfer, headers);
-	        return entity;
-	        
-	    }	    
-	  
+
+	public Transfer[] listTransfers (String authToken) {
+		Transfer[] transfers;
+
+		transfers = restTemplate.exchange(API_BASE_URL + "/transfer/list", HttpMethod.GET, makeAuthEntity(authToken), Transfer[].class).getBody();
+
+		return transfers;
+
+	}
+	public Transfer getTransferById (String authToken, long id) {
+		Transfer transfers =  new Transfer();
+		transfers = restTemplate.exchange(API_BASE_URL + "/transfer/" + id, HttpMethod.GET, makeAuthEntity(authToken), Transfer.class).getBody();
+
+		return transfers;
+
+	}
+
+
+
+	private HttpEntity makeAuthEntity(String authToken) {
+		HttpHeaders headers = new HttpHeaders();						// Instantiate a header object for request
+		headers.setBearerAuth(authToken);								// Set the "bearer" attribute in the header to the JWT																// the "bearer" attribute in a request header holds JWT
+		HttpEntity entity = new HttpEntity<>(headers);					// Create a properly formatted request by instantiating an entity
+		return entity;
+	}
+	private HttpEntity<Transfer> makeTransferEntity(Transfer transfer, String authToken) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(authToken);
+		HttpEntity<Transfer> entity = new HttpEntity<>(transfer, headers);
+		return entity;
+
+	}	    
+
 }

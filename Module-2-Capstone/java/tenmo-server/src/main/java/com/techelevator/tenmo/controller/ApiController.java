@@ -33,7 +33,7 @@ private UserDAO userDAO;
 private AccountUserDAO accountUserDAO;
 private TransferDAO transferDAO;
 
-
+// The above references do not need to be instantiated thanks to Spring dependency injection achieved by using @component in each DAO
 public ApiController(AccountDAOJDBC accountDAO, UserDAO userDAO, AccountUserDAO accountUserDAO, TransferDAO transferDAO) {
 	this.accountDAO = accountDAO;
 	this.userDAO = userDAO;
@@ -44,22 +44,22 @@ public ApiController(AccountDAOJDBC accountDAO, UserDAO userDAO, AccountUserDAO 
 
 @RequestMapping(path = "/account/balance", method = RequestMethod.GET)
 public double getAccountBalance(Principal userInfo) {				// Principal is a Spring boot security feature that contains the user information
-	long userId = userDAO.findIdByUsername(userInfo.getName());		// I understand the use of principal allowed us to get the ID but where does getName come from?
-    return accountDAO.getAccountBalance(userId);
+	long userId = userDAO.findIdByUsername(userInfo.getName());		// The pre-built userDAO conveniently contains a method to find the ID which we need
+    return accountDAO.getAccountBalance(userId);					//		in order to pass to our accountDAO method .getAccountBalance()				
     	
 }
 
 @RequestMapping (path = "/users", method = RequestMethod.GET)
 public List<AccountUser> listUsers(){
-	List<AccountUser> theUsers = new ArrayList();
+	List<AccountUser> theUsers = new ArrayList<AccountUser>();
 	theUsers = accountUserDAO.listUsers();
 	return theUsers;
 }
 
 @RequestMapping (path = "/transfer", method = RequestMethod.POST)
 public void update(Principal userInfo, @RequestBody Transfer aTransfer) throws Exception {	// @RequestBody takes data out of the request body and makes a transfer object
-	long transferFrom = userDAO.findIdByUsername(userInfo.getName());
-	 transferDAO.makeTransfer(aTransfer.getTransfer_to(), transferFrom, aTransfer.getAmount());
+	long transferFrom = userDAO.findIdByUsername(userInfo.getName());	// The transferFrom will be the logged in user as such the same logic above works
+	 transferDAO.makeTransfer(aTransfer.getTransfer_to(), transferFrom, aTransfer.getAmount());	// pass in the TransferTo and From ID's as well as the amount
 	
 }
 @RequestMapping (path = "/transfer/list", method = RequestMethod.GET)
