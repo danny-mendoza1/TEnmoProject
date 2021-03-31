@@ -1,16 +1,12 @@
 # Module 2 Capstone - TEnmo
-
-Congratulations—you've landed a job with TEnmo, whose product is an online payment service for transferring "TE bucks" between friends. However, they don't have a product yet. You've been tasked with writing a RESTful API server and command-line application.
-
-## Use cases
+This project was a pair exercise and required us to write a RESTful API server and command-line application given the following use cases.
 
 ### Required Use Cases
-You should attempt to complete all of the following required use cases.
 
-1. **[COMPLETED FOR YOU]** As a user of the system, I need to be able to register myself with a username and password.
+1. **[ALREADY COMPLETED]** As a user of the system, I need to be able to register myself with a username and password.
    1. A new registered user starts with an initial balance of 1,000 TE Bucks.
    2. The ability to register has been provided in your starter code.
-2. **[COMPLETED FOR YOU]** As a user of the system, I need to be able to log in using my registered username and password.
+2. **[ALREADY COMPLETED]** As a user of the system, I need to be able to log in using my registered username and password.
    1. Logging in returns an Authentication Token. I need to include this token with all my subsequent interactions with the system outside of registering and logging in.
    2. The ability to log in has been provided in your starter code.
 3. As an authenticated user of the system, I need to be able to see my Account Balance.
@@ -24,8 +20,7 @@ You should attempt to complete all of the following required use cases.
 5. As an authenticated user of the system, I need to be able to see transfers I have sent or received.
 6. As an authenticated user of the system, I need to be able to retrieve the details of any transfer based upon the transfer ID.
 
-### Optional Use Cases
-If you complete all of the required use cases and are looking for additional challenge, complete as many of the following optional use cases as you can.
+### Optional Use Cases (in progress)
 
 7. As an authenticated user of the system, I need to be able to *request* a transfer of a specific amount of TE Bucks from another registered user.
    1. I should be able to choose from a list of users to request TE Bucks from.
@@ -87,42 +82,6 @@ Transfer Details
  Type: Send
  Status: Approved
  Amount: $903.14
-```
-<div style="page-break-after: always"></div>
-
-### Use Case 7 - Requesting TE Bucks
-```
--------------------------------------------
-Users
-ID          Name
--------------------------------------------
-313         Bernice
-54          Larry
----------
-
-Enter ID of user you are requesting from (0 to cancel):
-Enter amount:
-```
-
-### Use Case 8 - Pending requests
-```
--------------------------------------------
-Pending Transfers
-ID          To                     Amount
--------------------------------------------
-88          Bernice                $ 142.56
-147         Larry                  $  10.17
----------
-Please enter transfer ID to approve/reject (0 to cancel): "
-```
-
-### Use Case 9 - Approve or reject pending transfer
-```
-1: Approve
-2: Reject
-0: Don't approve or reject
----------
-Please choose an option:
 ```
 <div style="page-break-after: always"></div>
 
@@ -200,13 +159,7 @@ The `transfer` table stores the transfers of TE bucks.
 | `account_to`         | Foreign key to the `accounts` table; identifies the account that the funds are going to         |
 | `amount`             | Amount of the transfer                                                                          |
 
-## How to set up the database
 
-1. Create a database called `tenmo`. If you name it something else be sure to change the name in the `application.properties` file in the server project.
-2. Create a connection to the `tenmo` database in dbVisualizer.
-3. In the database folder, you'll find a database creation script called `MakeTenmo.sql`.  Open this in dbVisualizer using the database connections you created for the `tenmo` database.
-4. Examine the tables, columns and relationships to be sure they match what has been shown in this document.  
+## Note on Authentication
 
-## Authentication
-
-The user registration and authentication functionality for the system has already been implemented. If you review the login code, you'll notice that after successful authentication, an instance of `AuthenticatedUser` is stored in the `currentUser` member variable of `App`. The user's authorization token—meaning JWT—can be accessed from `App` as `currentUser.getToken()`. When the use cases above refer to an "authenticated user", this means a request that includes the token as a header. You can also reference other information about the current user by using the `User` object retrieved from `currentUser.getUser()`.
+The user registration and authentication functionality for the system was already implemented. The user's authorization token can be accessed from `App` as `currentUser.getToken()`. When the use cases above refer to an "authenticated user", this means a request that includes the token as a header. 
